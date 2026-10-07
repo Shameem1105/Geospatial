@@ -66,7 +66,11 @@ export const Upload: React.FC = () => {
       const formData = new FormData();
       formData.append('file', selectedFile);
       const result = await apiClient.uploadFile(formData);
-      navigate(`/processing?fileId=${result.file_id}&filename=${encodeURIComponent(selectedFile.name)}`);
+      if (result.status === 'COMPLETED' || result.status === 'PARTIAL_SUCCESS') {
+        navigate(`/analysis?fileId=${result.file_id}`);
+      } else {
+        navigate(`/processing?fileId=${result.file_id}&filename=${encodeURIComponent(selectedFile.name)}`);
+      }
     } catch (err: any) {
       console.warn('Backend upload encountered an issue, transitioning to processing view:', err);
       navigate(`/processing?filename=${encodeURIComponent(selectedFile.name)}`);
