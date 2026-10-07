@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Chennai Metro Rail Infrastructure Corridor</name>
+    <description>Phase 2 alignment, station plazas, and depot yard facilities in Chennai, India.</description>
+
+    <!-- Station Area Polygon -->
+    <Placemark>
+      <name>Chennai Central Metro Interchange Hub</name>
+      <description>Multi-modal transit terminal connecting Central Station and Metro Phase 1 &amp; 2</description>
+      <ExtendedData>
+        <Data name="ZONE_ID"><value>CHN-METRO-01</value></Data>
+        <Data name="LAND_USE"><value>Transport Infrastructure</value></Data>
+        <Data name="AUTHORITY"><value>CMRL</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              80.2740,13.0815,0
+              80.2785,13.0815,0
+              80.2785,13.0850,0
+              80.2740,13.0850,0
+              80.2740,13.0815,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <!-- Koyambedu Depot Polygon -->
+    <Placemark>
+      <name>Koyambedu Maintenance &amp; Depot Yard</name>
+      <description>Rolling stock maintenance, stabling lines, and operational control center</description>
+      <ExtendedData>
+        <Data name="ZONE_ID"><value>CHN-METRO-02</value></Data>
+        <Data name="FACILITY"><value>Depot &amp; Workshop</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              80.1900,13.0700,0
+              80.1980,13.0700,0
+              80.1980,13.0760,0
+              80.1900,13.0760,0
+              80.1900,13.0700,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <!-- Blue Line Corridor LineString -->
+    <Placemark>
+      <name>Anna Salai Blue Line Elevated Corridor</name>
+      <description>Guindy to Saidapet to Nandanam metro corridor section</description>
+      <ExtendedData>
+        <Data name="CORRIDOR"><value>Blue Line Corridor 1</value></Data>
+        <Data name="STRUCTURE"><value>Elevated Viaduct</value></Data>
+      </ExtendedData>
+      <LineString>
+        <coordinates>
+          80.2185,13.0080,0
+          80.2240,13.0180,0
+          80.2310,13.0270,0
+          80.2390,13.0330,0
+          80.2450,13.0410,0
+          80.2520,13.0520,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <!-- Guindy Station Point -->
+    <Placemark>
+      <name>Guindy Metro Station</name>
+      <description>Interchange with Suburban Railway and Industrial Estate</description>
+      <Point>
+        <coordinates>80.2185,13.0080,0</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Saidapet Station Point -->
+    <Placemark>
+      <name>Saidapet Metro Station</name>
+      <description>Underground station adjacent to Maraimalai Adigal Bridge</description>
+      <Point>
+        <coordinates>80.2240,13.0180,0</coordinates>
+      </Point>
+    </Placemark>
+
+  </Document>
+</kml>

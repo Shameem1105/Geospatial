@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Mumbai Coastal Road Expressway Package</name>
+    <description>Reclaimed coastal alignment from Marine Drive to Worli Sea Face, Mumbai, Maharashtra.</description>
+
+    <Placemark>
+      <name>Marine Drive to Worli High-Speed Alignment</name>
+      <description>8-lane access controlled arterial coastal road with undersea tunnel section</description>
+      <LineString>
+        <coordinates>
+          72.8180,18.9440,0
+          72.8120,18.9600,0
+          72.8050,18.9800,0
+          72.8100,19.0020,0
+          72.8160,19.0200,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>Haji Ali Coastal Promenade Reclamation Plot</name>
+      <description>Reclaimed green parkland, seaside promenade and transit interchange</description>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              72.8080,18.9750,0
+              72.8140,18.9750,0
+              72.8140,18.9820,0
+              72.8080,18.9820,0
+              72.8080,18.9750,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark>
+      <name>Worli Sea Link Interchange Anchor Point</name>
+      <Point>
+        <coordinates>72.8160,19.0200,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

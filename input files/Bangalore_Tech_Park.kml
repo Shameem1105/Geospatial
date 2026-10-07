@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Bengaluru Electronic City Tech Park Zone</name>
+    <description>Special Economic Zone IT Park plots and internal arterial ring road in Bengaluru, Karnataka.</description>
+
+    <Placemark>
+      <name>Electronic City Phase 1 Main Campus</name>
+      <description>Major enterprise tech park and data center facility</description>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              77.6650,12.8450,0
+              77.6740,12.8450,0
+              77.6740,12.8520,0
+              77.6650,12.8520,0
+              77.6650,12.8450,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <Placemark>
+      <name>Hosur Road Expressway Flyover Link</name>
+      <description>Direct elevated expressway access ramp to IT Hub</description>
+      <LineString>
+        <coordinates>
+          77.6580,12.8380,0
+          77.6640,12.8440,0
+          77.6720,12.8500,0
+          77.6800,12.8580,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <Placemark>
+      <name>Helipad &amp; Emergency Hub</name>
+      <Point>
+        <coordinates>77.6680,12.8480,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

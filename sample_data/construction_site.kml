@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Chennai Industrial Complex - Site Survey</name>
+    <description>Geospatial survey data for construction and site layout planning.</description>
+    
+    <!-- Feature 1: Polygon - Building A Core Facility -->
+    <Placemark>
+      <name>Building A - Core Processing Facility</name>
+      <description>Main three-story industrial facility structure</description>
+      <ExtendedData>
+        <Data name="Contractor"><value>Apex Infrastructure Ltd</value></Data>
+        <Data name="Phase"><value>Phase 1</value></Data>
+        <Data name="StructureType"><value>Reinforced Concrete</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              80.220100,12.980100,0
+              80.221500,12.980100,0
+              80.221500,12.981200,0
+              80.220100,12.981200,0
+              80.220100,12.980100,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <!-- Feature 2: Polygon - Parking Area & Logistics Zone -->
+    <Placemark>
+      <name>Heavy Vehicle Parking &amp; Staging Bay</name>
+      <description>Paved logistics yard for heavy freight trucks</description>
+      <ExtendedData>
+        <Data name="Pavement"><value>Heavy Duty Asphalt</value></Data>
+        <Data name="Capacity"><value>45 Trucks</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              80.222000,12.980200,0
+              80.223200,12.980200,0
+              80.223200,12.981000,0
+              80.222000,12.981000,0
+              80.222000,12.980200,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+
+    <!-- Feature 3: LineString - Main Access Arterial Road -->
+    <Placemark>
+      <name>Primary Site Arterial Highway</name>
+      <description>Four-lane bitumen access corridor connecting to state highway</description>
+      <ExtendedData>
+        <Data name="Lanes"><value>4</value></Data>
+        <Data name="DesignSpeed"><value>60 km/h</value></Data>
+      </ExtendedData>
+      <LineString>
+        <coordinates>
+          80.218500,12.979000,0
+          80.220000,12.979800,0
+          80.221800,12.980500,0
+          80.223800,12.981500,0
+          80.225500,12.982200,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <!-- Feature 4: LineString - Industrial Stormwater Drainage & Pipeline -->
+    <Placemark>
+      <name>Subsurface Stormwater Culvert</name>
+      <description>Underground high-density concrete culvert</description>
+      <ExtendedData>
+        <Data name="PipeDiameter"><value>1200 mm</value></Data>
+        <Data name="Gradient"><value>1:150</value></Data>
+      </ExtendedData>
+      <LineString>
+        <coordinates>
+          80.220200,12.981300,0
+          80.221600,12.981350,0
+          80.222800,12.981700,0
+          80.224000,12.982100,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+    <!-- Feature 5: Point - Geodetic Survey Benchmark Alpha -->
+    <Placemark>
+      <name>Geodetic Survey Benchmark GTS-401</name>
+      <description>Permanent brass datum pin set in concrete for topographic control</description>
+      <ExtendedData>
+        <Data name="Elevation_MSL"><value>14.82 m</value></Data>
+        <Data name="EstablishedBy"><value>Survey of India</value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>80.220500,12.980500,14.82</coordinates>
+      </Point>
+    </Placemark>
+
+    <!-- Feature 6: Point - Main Security Gatehouse Checkpoint -->
+    <Placemark>
+      <name>Gatehouse Entry Checkpoint 01</name>
+      <description>Automated boom barrier and weighbridge checkpoint</description>
+      <ExtendedData>
+        <Data name="GateType"><value>Biometric + ANPR</value></Data>
+      </ExtendedData>
+      <Point>
+        <coordinates>80.218800,12.979200,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
