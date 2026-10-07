@@ -1,0 +1,13 @@
+# Vercel Serverless Function Exclusions
+# Exclude test files, documentation, and raw sample datasets from the Lambda bundle
+input files/
+sample_data/
+backend/tests/
+backend/venv/
+backend/.pytest_cache/
+backend/uploads/
+backend/temp/
+*.md
+.git
+.gitignore
+.env*
