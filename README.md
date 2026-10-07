@@ -742,7 +742,7 @@ TERRAFLOW (Vercel Project)
    - Vercel automatically builds the Vite frontend (`npm run build`) and mounts Python serverless API functions via `api/index.py` based on `vercel.json`.
 
 ### Production Links
-- **GitHub Repository**: [https://github.com/Shameem1105/terraflow](https://github.com/Shameem1105/terraflow)
+- **GitHub Repository**: [https://github.com/Shameem1105/Geospatial](https://github.com/Shameem1105/Geospatial)
 - **Deployment Platform**: Vercel Serverless (Vite Frontend + Python FastAPI Backend)
 - **Database Engine**: Relational MySQL / Cloud MySQL
 - **Documentation**: `/docs` (Swagger UI) & `/redoc` (ReDoc)
