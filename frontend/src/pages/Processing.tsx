@@ -11,7 +11,7 @@ export const Processing: React.FC = () => {
   const fileId = searchParams.get('fileId');
   const filename = searchParams.get('filename') || 'Chennai_Site_Survey.kml';
 
-  const [progress, setProgress] = useState(82);
+  const [progress, setProgress] = useState(25);
 
   const getStepState = (stepIndex: number): 'done' | 'active' | 'pending' => {
     const currentIndex = Math.floor((progress / 100) * 8);
@@ -23,36 +23,52 @@ export const Processing: React.FC = () => {
   const steps = [
     { label: 'File validated', state: getStepState(0) },
     { label: 'Dataset parsed', state: getStepState(1) },
-    { label: '1,284 features detected', state: getStepState(2) },
+    { label: 'Features detected', state: getStepState(2) },
     { label: 'CRS detected: EPSG:4326', state: getStepState(3) },
     { label: 'Geometry validation complete', state: getStepState(4) },
     {
       label: 'Transforming coordinates',
       state: getStepState(5),
-      sub: 'Transforming to projected CRS EPSG:32644',
+      sub: 'Transforming to optimal projected UTM zone',
     },
     { label: 'Calculating measurements', state: getStepState(6) },
     { label: 'Storing results', state: getStepState(7) },
   ];
 
-  // Poll real job if fileId is present
   useEffect(() => {
-    if (!fileId) return;
+    let interval: any;
 
-    const interval = setInterval(async () => {
-      try {
-        const file = await apiClient.getFile(fileId);
-        if (file.processing_job?.progress) {
-          setProgress(file.processing_job.progress);
+    if (fileId) {
+      interval = setInterval(async () => {
+        try {
+          const file = await apiClient.getFile(fileId);
+          if (file.processing_job?.progress) {
+            setProgress(file.processing_job.progress);
+          }
+          if (file.status === 'COMPLETED' || file.status === 'PARTIAL_SUCCESS') {
+            setProgress(100);
+            clearInterval(interval);
+            setTimeout(() => {
+              navigate(`/analysis?fileId=${fileId}`);
+            }, 600);
+          }
+        } catch (e) {
+          console.log('Status polling error, continuing demo progress:', e);
         }
-        if (file.status === 'COMPLETED') {
-          clearInterval(interval);
-          navigate(`/analysis?fileId=${fileId}`);
-        }
-      } catch (e) {
-        console.log('Status polling:', e);
-      }
-    }, 2000);
+      }, 1500);
+    } else {
+      // Smooth automatic transition when previewing dataset
+      interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            setTimeout(() => navigate('/analysis'), 600);
+            return 100;
+          }
+          return prev + Math.floor(Math.random() * 15 + 10);
+        });
+      }, 400);
+    }
 
     return () => clearInterval(interval);
   }, [fileId, navigate]);

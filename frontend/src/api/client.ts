@@ -8,7 +8,21 @@ import type {
   HealthStatus 
 } from '../types';
 
-const API_BASE = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
+const getApiBaseUrl = (): string => {
+  if (import.meta.env.VITE_API_URL) return import.meta.env.VITE_API_URL;
+  if (import.meta.env.VITE_API_BASE_URL) return import.meta.env.VITE_API_BASE_URL;
+  if (typeof window !== 'undefined') {
+    // If running in local browser dev
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:8000/api/v1';
+    }
+    // When deployed on Vercel (e.g. geospatial-zeta.vercel.app), use same-origin relative path
+    return '/api/v1';
+  }
+  return '/api/v1';
+};
+
+const API_BASE = getApiBaseUrl();
 
 const api = axios.create({
   baseURL: API_BASE,
