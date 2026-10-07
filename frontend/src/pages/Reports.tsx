@@ -4,12 +4,72 @@ import { Button } from '../components/Button';
 import { Logo } from '../components/Logo';
 
 export const Reports: React.FC = () => {
-  const [selectedProject, setSelectedProject] = useState('Chennai Site Survey');
+  const [selectedProject, setSelectedProject] = useState('Bangalore Tech Park');
   const [selectedSections, setSelectedSections] = useState<string[]>([
     'Executive summary',
     'Feature measurements',
     'CRS & processing metadata',
   ]);
+
+  const projectReports: Record<string, {
+    area: string;
+    length: string;
+    features: string;
+    sourceCrs: string;
+    measureCrs: string;
+    date: string;
+  }> = {
+    'Bangalore Tech Park': {
+      area: '72,436.34 m²',
+      length: '2.45 km',
+      features: '3',
+      sourceCrs: 'EPSG:4326',
+      measureCrs: 'EPSG:32643 (UTM 43N)',
+      date: '08 Oct 2026',
+    },
+    'Chennai Metro Corridor': {
+      area: '48,293.72 m²',
+      length: '24.03 km',
+      features: '5',
+      sourceCrs: 'EPSG:4326',
+      measureCrs: 'EPSG:32644 (UTM 44N)',
+      date: '08 Oct 2026',
+    },
+    'Mumbai Coastal Road': {
+      area: '34,120.00 m²',
+      length: '29.20 km',
+      features: '4',
+      sourceCrs: 'EPSG:4326',
+      measureCrs: 'EPSG:32643 (UTM 43N)',
+      date: '08 Oct 2026',
+    },
+    'Hyderabad HITEC City': {
+      area: '165,000.00 m²',
+      length: '8.40 km',
+      features: '4',
+      sourceCrs: 'EPSG:4326',
+      measureCrs: 'EPSG:32644 (UTM 44N)',
+      date: '08 Oct 2026',
+    },
+    'Delhi Aerocity Infrastructure': {
+      area: '170,000.00 m²',
+      length: '7.20 km',
+      features: '6',
+      sourceCrs: 'EPSG:4326',
+      measureCrs: 'EPSG:32643 (UTM 43N)',
+      date: '08 Oct 2026',
+    },
+    'Dubai Marina Development': {
+      area: '196,400.00 m²',
+      length: '5.10 km',
+      features: '4',
+      sourceCrs: 'EPSG:4326',
+      measureCrs: 'EPSG:32640 (UTM 40N)',
+      date: '08 Oct 2026',
+    },
+  };
+
+  const currentReport = projectReports[selectedProject] || projectReports['Bangalore Tech Park'];
 
   const reportActions: [string, string, IconName][] = [
     ['Generate Site Report', 'Full measurement summary', 'report'],
@@ -53,7 +113,13 @@ export const Reports: React.FC = () => {
               <div
                 className="report-action panel"
                 key={title}
-                onClick={() => alert(`Starting ${title}...`)}
+                onClick={() => {
+                  if (title === 'Export CSV') {
+                    window.open('/api/v1/reports/csv/latest', '_blank');
+                  } else {
+                    window.print();
+                  }
+                }}
               >
                 <span>
                   <Icon name={iconName} />
@@ -75,9 +141,9 @@ export const Reports: React.FC = () => {
                 value={selectedProject}
                 onChange={(e) => setSelectedProject(e.target.value)}
               >
-                <option value="Chennai Site Survey">Chennai Site Survey</option>
-                <option value="NH Infrastructure Corridor">NH Infrastructure Corridor</option>
-                <option value="Eastern Corridor Railway">Eastern Corridor Railway</option>
+                {Object.keys(projectReports).map((name) => (
+                  <option key={name} value={name}>{name}</option>
+                ))}
               </select>
             </label>
             <label>Include sections</label>
@@ -115,43 +181,41 @@ export const Reports: React.FC = () => {
             </div>
             <div className="report-kicker">SITE MEASUREMENT REPORT</div>
             <div className="report-title">
-              Chennai
-              <br />
-              Site Survey
+              {selectedProject}
             </div>
             <div className="report-rule" />
             <div className="report-meta">
               <div>
                 <span>PROJECT</span>
-                <strong>Chennai Metro Site</strong>
+                <strong>{selectedProject}</strong>
               </div>
               <div>
                 <span>PROCESSING DATE</span>
-                <strong>07 Oct 2026</strong>
+                <strong>{currentReport.date}</strong>
               </div>
             </div>
             <div className="report-total">
               <span>TOTAL MEASURED AREA</span>
               <strong>
-                48,293.72 <i>m²</i>
+                {currentReport.area}
               </strong>
             </div>
             <div className="report-data">
               <div>
                 <span>TOTAL FEATURES</span>
-                <strong>1,284</strong>
+                <strong>{currentReport.features}</strong>
               </div>
               <div>
                 <span>TOTAL LINE LENGTH</span>
-                <strong>128.43 km</strong>
+                <strong>{currentReport.length}</strong>
               </div>
               <div>
                 <span>SOURCE CRS</span>
-                <code>EPSG:4326</code>
+                <code>{currentReport.sourceCrs}</code>
               </div>
               <div>
                 <span>MEASUREMENT CRS</span>
-                <code>EPSG:32644</code>
+                <code>{currentReport.measureCrs}</code>
               </div>
             </div>
             <div className="report-footer">

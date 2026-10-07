@@ -11,7 +11,7 @@ const pageTitles: Record<string, string> = {
   '/': 'Geospatial Operations',
   '/upload': 'Import Geospatial Dataset',
   '/processing': 'Processing Dataset',
-  '/analysis': 'Chennai Site Survey',
+  '/analysis': 'Dataset Spatial Analysis',
   '/explorer': 'Feature Explorer',
   '/analytics': 'Engineering Analytics',
   '/reports': 'Measurement Reports',
