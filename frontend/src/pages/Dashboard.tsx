@@ -9,10 +9,11 @@ import { apiClient } from '../api/client';
 import type { FileRecord } from '../types';
 
 const defaultProcessingRows = [
-  ['Chennai_Site_Survey.kml', 'Chennai Metro Site', '1,284', 'EPSG:4326', 'Completed', '2 min ago', 'chennai-survey'],
-  ['Highway_Section_A.zip', 'NH Infrastructure', '8,421', 'EPSG:32644', 'Completed', '18 min ago', 'highway-a'],
-  ['Industrial_Plot_07.kml', 'Industrial Zone', '482', 'EPSG:4326', 'Processing', '24 min ago', 'plot-07'],
-  ['Bridge_Corridor_V2.zip', 'Eastern Corridor', '2,108', 'EPSG:32643', 'Completed', 'Yesterday', 'bridge-v2'],
+  ['Bangalore_Tech_Park.kml', 'Bangalore Tech Park', '3', 'EPSG:4326', 'Completed', 'Just now', 'bangalore-tech-park'],
+  ['Chennai_Metro_Corridor.kml', 'Chennai Metro Corridor', '5', 'EPSG:4326', 'Completed', '12 min ago', 'chennai-metro'],
+  ['Mumbai_Coastal_Road.kml', 'Mumbai Coastal Road', '4', 'EPSG:4326', 'Completed', '28 min ago', 'mumbai-coastal'],
+  ['Hyderabad_HITEC_City_Zoning.zip', 'Hyderabad HITEC City', '4', 'EPSG:4326', 'Completed', '1 hour ago', 'hyderabad-hitec'],
+  ['Delhi_Aerocity_Infrastructure.zip', 'Delhi Aerocity', '6', 'EPSG:4326', 'Completed', 'Yesterday', 'delhi-aerocity'],
 ];
 
 export const Dashboard: React.FC = () => {

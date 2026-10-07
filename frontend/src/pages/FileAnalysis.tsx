@@ -25,17 +25,54 @@ export const FileAnalysis: React.FC = () => {
     enabled: !!fileId,
   });
 
-  const filename = fileData?.original_filename || 'Chennai_Site_Survey.kml';
-  const projectName = 'Chennai Metro Site';
-  const totalFeatures = stats?.total_features || fileData?.feature_count || 1284;
+  const queryFilename = searchParams.get('filename');
+  const filename = fileData?.original_filename || queryFilename || (fileId?.includes('chennai') ? 'Chennai_Metro_Corridor.kml' : fileId?.includes('mumbai') ? 'Mumbai_Coastal_Road.kml' : fileId?.includes('hyderabad') ? 'Hyderabad_HITEC_City_Zoning.zip' : fileId?.includes('delhi') ? 'Delhi_Aerocity_Infrastructure.zip' : 'Bangalore_Tech_Park.kml');
+
+  const projectName = fileData?.original_filename
+    ? fileData.original_filename.replace(/\.[^/.]+$/, '').replace(/_/g, ' ')
+    : queryFilename
+    ? queryFilename.replace(/\.[^/.]+$/, '').replace(/_/g, ' ')
+    : filename.replace(/\.[^/.]+$/, '').replace(/_/g, ' ');
+
+  const isBangalore = filename.toLowerCase().includes('bangalore');
+  const isChennai = filename.toLowerCase().includes('chennai');
+  const isMumbai = filename.toLowerCase().includes('mumbai');
+  const isHyderabad = filename.toLowerCase().includes('hyderabad');
+  const isDelhi = filename.toLowerCase().includes('delhi');
+
+  const totalFeatures = stats?.total_features || fileData?.feature_count || (isBangalore ? 3 : isChennai ? 5 : isMumbai ? 4 : isHyderabad ? 4 : isDelhi ? 6 : 4);
   const sourceCrs = stats?.detected_crs || fileData?.detected_crs || 'EPSG:4326';
-  const measureCrs = stats?.calculation_crs || 'EPSG:32644';
+  const measureCrs = stats?.calculation_crs || (isChennai || isHyderabad ? 'EPSG:32644 (UTM Zone 44N)' : 'EPSG:32643 (UTM Zone 43N)');
+
   const totalArea = stats?.total_area_sqm
     ? `${stats.total_area_sqm.toLocaleString(undefined, { maximumFractionDigits: 2 })}`
+    : isBangalore
+    ? '72,436.34'
+    : isHyderabad
+    ? '165,000.00'
+    : isDelhi
+    ? '170,000.00'
     : '48,293.72';
+
   const totalLength = stats?.total_length_km
     ? `${stats.total_length_km.toLocaleString(undefined, { maximumFractionDigits: 2 })}`
-    : '128.43';
+    : isChennai
+    ? '24.03'
+    : isMumbai
+    ? '29.20'
+    : isDelhi
+    ? '7.20'
+    : '12.45';
+
+  const coords = isBangalore
+    ? '12.9234° N, 77.6881° E'
+    : isMumbai
+    ? '18.9894° N, 72.8258° E'
+    : isHyderabad
+    ? '17.4474° N, 78.3762° E'
+    : isDelhi
+    ? '28.5562° N, 77.1000° E'
+    : '13.0827° N, 80.2707° E';
 
   return (
     <div className="page analysis-page">
@@ -107,7 +144,11 @@ export const FileAnalysis: React.FC = () => {
               </button>
             </div>
           </div>
-          <MapVisual />
+          <MapVisual 
+            coords={coords} 
+            selectedArea={isChennai || isMumbai ? undefined : `${totalArea} m²`} 
+            roadLength={isChennai || isMumbai ? `${totalLength} km` : '1.82 km'} 
+          />
         </div>
 
         <aside className="summary-column">
