@@ -135,10 +135,10 @@ export const Upload: React.FC = () => {
             </div>
             <Button
               icon="cloud"
-              onClick={selectedFile ? handleUploadAndProcess : () => navigate('/processing')}
+              onClick={selectedFile ? handleUploadAndProcess : () => fileInputRef.current?.click()}
               disabled={isUploading}
             >
-              {isUploading ? 'Uploading...' : 'Upload & Process'}
+              {isUploading ? 'Uploading & Processing...' : selectedFile ? 'Upload & Process' : 'Select File to Upload'}
             </Button>
           </div>
         </div>

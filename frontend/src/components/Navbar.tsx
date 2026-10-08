@@ -1,6 +1,7 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Icon } from './Icons';
+import { Button } from './Button';
 
 interface NavbarProps {
   title?: string;
@@ -8,27 +9,23 @@ interface NavbarProps {
 }
 
 const pageTitles: Record<string, string> = {
-  '/': 'Geospatial Operations',
-  '/upload': 'Import Geospatial Dataset',
+  '/': 'Geospatial Dashboard',
+  '/upload': 'Upload & Run Dataset',
   '/processing': 'Processing Dataset',
-  '/analysis': 'Dataset Spatial Analysis',
-  '/explorer': 'Feature Explorer',
-  '/analytics': 'Engineering Analytics',
-  '/reports': 'Measurement Reports',
-  '/projects': 'Projects',
-  '/files': 'Survey Files',
-  '/settings': 'Settings',
+  '/analysis': 'Spatial Analysis Map',
+  '/explorer': 'Feature & Map Explorer',
 };
 
 export const Navbar: React.FC<NavbarProps> = ({ title, onToggleMenu }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const getTitle = () => {
     if (title) return title;
     const match = Object.keys(pageTitles).find((path) =>
       path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)
     );
-    return match ? pageTitles[match] : 'Overview';
+    return match ? pageTitles[match] : 'Dashboard';
   };
 
   return (
@@ -44,22 +41,14 @@ export const Navbar: React.FC<NavbarProps> = ({ title, onToggleMenu }) => {
       </div>
 
       <div className="header-actions">
-        <div className="search">
-          <Icon name="search" />
-          <span>Search datasets, projects...</span>
-          <kbd>⌘ K</kbd>
-        </div>
-
-        <button className="icon-button" aria-label="Notifications">
-          <Icon name="bell" />
-          <span className="notification" />
-        </button>
-
-        <button className="workspace-switcher" aria-label="Switch workspace">
-          <span className="workspace-icon">HC</span>
-          <span>Horizon Civil</span>
-          <Icon name="arrow" size={14} />
-        </button>
+        {location.pathname !== '/upload' && (
+          <Button
+            icon="cloud"
+            onClick={() => navigate('/upload')}
+          >
+            Upload File
+          </Button>
+        )}
       </div>
     </header>
   );

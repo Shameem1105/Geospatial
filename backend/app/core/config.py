@@ -10,6 +10,9 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
     
+    # Optional direct DATABASE_URL override (e.g. sqlite:///./terraflow.db or mysql+pymysql://...)
+    DATABASE_URL_ENV: str = Field(default="", alias="DATABASE_URL")
+    
     # Database Settings (Direct MySQL connection)
     DB_HOST: str = Field(default="localhost", alias="DB_HOST")
     DB_PORT: int = Field(default=3306, alias="DB_PORT")
@@ -36,12 +39,16 @@ class Settings(BaseSettings):
 
     @property
     def DATABASE_URL(self) -> str:
+        if self.DATABASE_URL_ENV:
+            return self.DATABASE_URL_ENV
         # Construct PyMySQL URL
         pw = f":{self.DB_PASSWORD}" if self.DB_PASSWORD else ""
         return f"mysql+pymysql://{self.DB_USER}{pw}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}?charset=utf8mb4"
 
     @property
     def SERVER_URL(self) -> str:
+        if self.DATABASE_URL_ENV:
+            return self.DATABASE_URL_ENV
         # Server URL for creating DB if it does not exist
         pw = f":{self.DB_PASSWORD}" if self.DB_PASSWORD else ""
         return f"mysql+pymysql://{self.DB_USER}{pw}@{self.DB_HOST}:{self.DB_PORT}/?charset=utf8mb4"

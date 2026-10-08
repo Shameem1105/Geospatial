@@ -14,7 +14,7 @@ chennai_kml = """<?xml version="1.0" encoding="UTF-8"?>
     <name>Chennai Metro Rail Infrastructure Corridor</name>
     <description>Phase 2 alignment, station plazas, and depot yard facilities in Chennai, India.</description>
 
-    <!-- Station Area Polygon -->
+    <!-- Station Area Polygon (Realistic Multi-Vertex Transit Plaza) -->
     <Placemark>
       <name>Chennai Central Metro Interchange Hub</name>
       <description>Multi-modal transit terminal connecting Central Station and Metro Phase 1 &amp; 2</description>
@@ -27,18 +27,20 @@ chennai_kml = """<?xml version="1.0" encoding="UTF-8"?>
         <outerBoundaryIs>
           <LinearRing>
             <coordinates>
-              80.2740,13.0815,0
-              80.2785,13.0815,0
-              80.2785,13.0850,0
-              80.2740,13.0850,0
-              80.2740,13.0815,0
+              80.2725,13.0810,0
+              80.2770,13.0795,0
+              80.2805,13.0835,0
+              80.2780,13.0865,0
+              80.2735,13.0855,0
+              80.2710,13.0830,0
+              80.2725,13.0810,0
             </coordinates>
           </LinearRing>
         </outerBoundaryIs>
       </Polygon>
     </Placemark>
 
-    <!-- Koyambedu Depot Polygon -->
+    <!-- Koyambedu Depot Polygon (Multi-sided Depot Yard) -->
     <Placemark>
       <name>Koyambedu Maintenance &amp; Depot Yard</name>
       <description>Rolling stock maintenance, stabling lines, and operational control center</description>
@@ -50,11 +52,13 @@ chennai_kml = """<?xml version="1.0" encoding="UTF-8"?>
         <outerBoundaryIs>
           <LinearRing>
             <coordinates>
-              80.1900,13.0700,0
-              80.1980,13.0700,0
-              80.1980,13.0760,0
-              80.1900,13.0760,0
-              80.1900,13.0700,0
+              80.1880,13.0690,0
+              80.1960,13.0680,0
+              80.1995,13.0730,0
+              80.1970,13.0780,0
+              80.1895,13.0770,0
+              80.1865,13.0725,0
+              80.1880,13.0690,0
             </coordinates>
           </LinearRing>
         </outerBoundaryIs>
@@ -115,18 +119,22 @@ bangalore_kml = """<?xml version="1.0" encoding="UTF-8"?>
     <name>Bengaluru Electronic City Tech Park Zone</name>
     <description>Special Economic Zone IT Park plots and internal arterial ring road in Bengaluru, Karnataka.</description>
 
+    <!-- Electronic City Phase 1 Realistic Multi-Vertex Campus Boundary -->
     <Placemark>
       <name>Electronic City Phase 1 Main Campus</name>
-      <description>Major enterprise tech park and data center facility</description>
+      <description>Major enterprise tech park and data center facility in Bengaluru</description>
       <Polygon>
         <outerBoundaryIs>
           <LinearRing>
             <coordinates>
-              77.6650,12.8450,0
-              77.6740,12.8450,0
-              77.6740,12.8520,0
-              77.6650,12.8520,0
-              77.6650,12.8450,0
+              77.6630,12.8465,0
+              77.6675,12.8435,0
+              77.6738,12.8450,0
+              77.6765,12.8495,0
+              77.6740,12.8535,0
+              77.6685,12.8540,0
+              77.6645,12.8510,0
+              77.6630,12.8465,0
             </coordinates>
           </LinearRing>
         </outerBoundaryIs>
@@ -189,11 +197,12 @@ mumbai_kml = """<?xml version="1.0" encoding="UTF-8"?>
         <outerBoundaryIs>
           <LinearRing>
             <coordinates>
-              72.8080,18.9750,0
-              72.8140,18.9750,0
-              72.8140,18.9820,0
-              72.8080,18.9820,0
-              72.8080,18.9750,0
+              72.8060,18.9740,0
+              72.8125,18.9715,0
+              72.8160,18.9785,0
+              72.8130,18.9840,0
+              72.8075,18.9815,0
+              72.8060,18.9740,0
             </coordinates>
           </LinearRing>
         </outerBoundaryIs>
@@ -329,7 +338,7 @@ def build_shapefile_zip(output_zip_path: str, base_name: str, features_list: lis
 
 
 # -------------------------------------------------------------
-# 4. Hyderabad HITEC City Zoning ZIP
+# 4. Hyderabad HITEC City Zoning ZIP (Multi-Vertex Real Parcels)
 # -------------------------------------------------------------
 hyd_features = [
     {
@@ -337,11 +346,12 @@ hyd_features = [
         "zoning": "Commercial-IT",
         "district": "Madhapur",
         "pts": [
-            (78.3750, 17.4480),
-            (78.3810, 17.4480),
-            (78.3810, 17.4530),
-            (78.3750, 17.4530),
-            (78.3750, 17.4480)
+            (78.3735, 17.4470),
+            (78.3785, 17.4455),
+            (78.3820, 17.4490),
+            (78.3800, 17.4545),
+            (78.3745, 17.4530),
+            (78.3735, 17.4470)
         ]
     },
     {
@@ -349,11 +359,12 @@ hyd_features = [
         "zoning": "Mixed-Commercial",
         "district": "Raidurg",
         "pts": [
-            (78.3820, 17.4420),
-            (78.3890, 17.4420),
-            (78.3890, 17.4470),
-            (78.3820, 17.4470),
-            (78.3820, 17.4420)
+            (78.3810, 17.4410),
+            (78.3865, 17.4395),
+            (78.3905, 17.4435),
+            (78.3880, 17.4485),
+            (78.3825, 17.4470),
+            (78.3810, 17.4410)
         ]
     }
 ]
@@ -366,7 +377,7 @@ build_shapefile_zip(
 )
 
 # -------------------------------------------------------------
-# 5. Delhi Aerocity Infrastructure ZIP
+# 5. Delhi Aerocity Infrastructure ZIP (Multi-Vertex Real Parcels)
 # -------------------------------------------------------------
 delhi_features = [
     {
@@ -374,11 +385,12 @@ delhi_features = [
         "sector": "Hospitality-01",
         "authority": "DIAL-GMR",
         "pts": [
-            (77.1180, 28.5480),
-            (77.1260, 28.5480),
-            (77.1260, 28.5540),
-            (77.1180, 28.5540),
-            (77.1180, 28.5480)
+            (77.1165, 28.5470),
+            (77.1235, 28.5455),
+            (77.1275, 28.5495),
+            (77.1250, 28.5555),
+            (77.1185, 28.5540),
+            (77.1165, 28.5470)
         ]
     },
     {
@@ -386,11 +398,12 @@ delhi_features = [
         "sector": "Cargo-Logistics",
         "authority": "AAI",
         "pts": [
-            (77.1100, 28.5420),
-            (77.1170, 28.5420),
-            (77.1170, 28.5470),
-            (77.1100, 28.5470),
-            (77.1100, 28.5420)
+            (77.1085, 28.5410),
+            (77.1145, 28.5395),
+            (77.1185, 28.5435),
+            (77.1160, 28.5485),
+            (77.1095, 28.5470),
+            (77.1085, 28.5410)
         ]
     }
 ]
@@ -411,11 +424,12 @@ dubai_features = [
         "zone": "Waterfront-Res",
         "developer": "Emaar Properties",
         "pts": [
-            (55.1380, 25.0780),
-            (55.1440, 25.0780),
-            (55.1440, 25.0840),
-            (55.1380, 25.0840),
-            (55.1380, 25.0780)
+            (55.1365, 25.0770),
+            (55.1415, 25.0755),
+            (55.1455, 25.0795),
+            (55.1430, 25.0855),
+            (55.1375, 25.0840),
+            (55.1365, 25.0770)
         ]
     },
     {
@@ -423,11 +437,12 @@ dubai_features = [
         "zone": "Commercial-Retail",
         "developer": "Dubai Holding",
         "pts": [
-            (55.1320, 25.0720),
-            (55.1370, 25.0720),
-            (55.1370, 25.0770),
-            (55.1320, 25.0770),
-            (55.1320, 25.0720)
+            (55.1305, 25.0710),
+            (55.1355, 25.0695),
+            (55.1385, 25.0735),
+            (55.1360, 25.0785),
+            (55.1310, 25.0770),
+            (55.1305, 25.0710)
         ]
     }
 ]
