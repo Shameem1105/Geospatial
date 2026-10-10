@@ -28,15 +28,15 @@ export const Reports: React.FC = () => {
       date: '08 Oct 2026',
     },
     'Chennai Metro Corridor': {
-      area: '48,293.72 m²',
-      length: '24.03 km',
+      area: '764,407.89 m²',
+      length: '6.13 km',
       features: '5',
       sourceCrs: 'EPSG:4326',
       measureCrs: 'EPSG:32644 (UTM 44N)',
       date: '08 Oct 2026',
     },
     'Mumbai Coastal Road': {
-      area: '34,120.00 m²',
+      area: 'N/A (Linear Corridor)',
       length: '29.20 km',
       features: '4',
       sourceCrs: 'EPSG:4326',
@@ -45,7 +45,7 @@ export const Reports: React.FC = () => {
     },
     'Hyderabad HITEC City': {
       area: '165,000.00 m²',
-      length: '8.40 km',
+      length: 'N/A (Zoning Parcels)',
       features: '4',
       sourceCrs: 'EPSG:4326',
       measureCrs: 'EPSG:32644 (UTM 44N)',

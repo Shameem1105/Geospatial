@@ -459,18 +459,25 @@ main {
 /* Metric Cards */
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
 }
 
 .metric-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 20px;
+  padding: 22px 24px;
   min-height: 142px;
   position: relative;
   overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.metric-card:hover {
+  border-color: #3d464f;
+  transform: translateY(-2px);
 }
 
 .metric-card.accent:after {
@@ -518,10 +525,11 @@ main {
 
 /* Dashboard Grid */
 .dashboard-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 2.3fr) minmax(280px, .7fr);
-  gap: 14px;
-  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  width: 100%;
 }
 
 .panel {

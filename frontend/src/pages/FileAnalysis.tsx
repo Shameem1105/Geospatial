@@ -86,8 +86,8 @@ export const FileAnalysis: React.FC = () => {
     <div className="page analysis-page">
       <div className="analysis-head">
         <div>
-          <div className="back-link" onClick={() => navigate('/files')}>
-            ← Survey files / {projectName}
+          <div className="back-link" onClick={() => navigate('/')}>
+            ← Dashboard / {projectName}
           </div>
           <div className="title-with-status">
             <div className="page-title">{projectName}</div>
@@ -119,18 +119,10 @@ export const FileAnalysis: React.FC = () => {
 
           <Button
             variant="secondary"
-            icon="code"
-            onClick={() => navigate(`/explorer?fileId=${currentFileId}`)}
+            icon="cloud"
+            onClick={() => navigate('/upload')}
           >
-            Inspect Features
-          </Button>
-
-          <Button
-            variant="secondary"
-            icon="report"
-            onClick={() => navigate('/reports')}
-          >
-            Report
+            Upload New File
           </Button>
 
           <Button

@@ -274,7 +274,7 @@ export const MapViewer: React.FC<Props> = ({
         {filteredData && (
           <>
             <GeoJSON
-              key={`${filterType}-${tileMode}-${JSON.stringify(filteredData?.features?.length || 0)}`}
+              key={`${filterType}-${tileMode}-${filteredData?.features?.[0]?.id || 'f0'}-${filteredData?.features?.length || 0}-${selectedFeatureId || 'none'}`}
               data={filteredData}
               style={styleFeature}
               pointToLayer={pointToLayer}

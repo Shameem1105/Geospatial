@@ -8,7 +8,6 @@ import { Dashboard } from './pages/Dashboard';
 import { Upload } from './pages/Upload';
 import { Processing } from './pages/Processing';
 import { FileAnalysis } from './pages/FileAnalysis';
-import { FeatureExplorer } from './pages/FeatureExplorer';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,7 +42,6 @@ export const App: React.FC = () => {
               <Route path="/upload" element={<Upload />} />
               <Route path="/processing" element={<Processing />} />
               <Route path="/analysis" element={<FileAnalysis />} />
-              <Route path="/explorer" element={<FeatureExplorer />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>

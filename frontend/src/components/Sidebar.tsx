@@ -11,7 +11,7 @@ export interface SidebarProps {
 const navItems: { path: string; label: string; icon: IconName }[] = [
   { path: '/', label: 'Dashboard', icon: 'grid' },
   { path: '/upload', label: 'Upload & Run', icon: 'cloud' },
-  { path: '/explorer', label: 'Map & Features', icon: 'ruler' },
+  { path: '/analysis', label: 'Spatial Map View', icon: 'layers' },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ open = false, onClose }) => {

@@ -21,6 +21,66 @@ logging.basicConfig(
 )
 logger = logging.getLogger("terraflow")
 
+def seed_initial_datasets_if_empty():
+    from app.core.database import SessionLocal
+    from app.models.file import FileRecord
+    from app.models.project import Project
+    from app.services.processing_service import ProcessingService
+    import uuid
+    import shutil
+
+    db = SessionLocal()
+    try:
+        if db.query(FileRecord).count() == 0:
+            logger.info("Database has no files. Auto-seeding initial survey packages...")
+            proj = db.query(Project).filter(Project.name == "Global Infrastructure Portfolio").first()
+            if not proj:
+                proj = Project(
+                    id=str(uuid.uuid4()),
+                    name="Global Infrastructure Portfolio",
+                    description="Comprehensive real-world survey packages across Bangalore, Chennai, Mumbai, Hyderabad, and Delhi."
+                )
+                db.add(proj)
+                db.commit()
+                db.refresh(proj)
+
+            possible_dirs = [
+                os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "input files"),
+                os.path.join(os.getcwd(), "input files"),
+                os.path.join(os.path.dirname(os.path.dirname(__file__)), "input files")
+            ]
+            for input_dir in possible_dirs:
+                if os.path.exists(input_dir):
+                    for fn in os.listdir(input_dir):
+                        if fn.endswith((".kml", ".zip")):
+                            src_path = os.path.join(input_dir, fn)
+                            ext = os.path.splitext(fn)[1].lower()
+                            ftype = "kml" if ext == ".kml" else "shapefile_zip"
+                            fid = str(uuid.uuid4())
+                            dst_name = f"{fid}_{fn}"
+                            dst_path = os.path.join(settings.UPLOAD_DIR, dst_name)
+                            try:
+                                shutil.copy2(src_path, dst_path)
+                                f_rec = FileRecord(
+                                    id=fid,
+                                    project_id=proj.id,
+                                    original_filename=fn,
+                                    stored_filename=dst_path,
+                                    file_type=ftype,
+                                    file_size=os.path.getsize(dst_path),
+                                    status="UPLOADED"
+                                )
+                                db.add(f_rec)
+                                db.commit()
+                                ProcessingService.process_file_job(fid, db=db)
+                            except Exception as ex:
+                                logger.warning(f"Could not seed {fn}: {ex}")
+                    break
+    except Exception as e:
+        logger.warning(f"Auto-seeding notice: {e}")
+    finally:
+        db.close()
+
 def init_database():
     try:
         os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
@@ -31,6 +91,7 @@ def init_database():
     try:
         Base.metadata.create_all(bind=engine)
         logger.info("Database tables verified/created successfully.")
+        seed_initial_datasets_if_empty()
     except Exception as e:
         logger.warning(f"Could not connect to database during startup/init: {e}")
 

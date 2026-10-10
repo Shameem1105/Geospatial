@@ -17,10 +17,10 @@ export const Settings: React.FC = () => {
   ];
 
   const systemStatus = [
-    ['REST API', 'Operational', '42 ms'],
-    ['Processing workers', 'Operational', '8 active'],
-    ['PostGIS database', 'Operational', '18 ms'],
-    ['Object storage', 'Operational', '99.99%'],
+    ['REST API (FastAPI)', 'Operational', '42 ms'],
+    ['Processing Workers', 'Operational', '8 active'],
+    ['MySQL Relational Database', 'Operational', '18 ms'],
+    ['Local & Ephemeral Storage', 'Operational', '99.99%'],
   ];
 
   const copyToClipboard = (text: string) => {
