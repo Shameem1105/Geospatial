@@ -228,27 +228,51 @@ export const FileAnalysis: React.FC = () => {
             </div>
           </div>
 
-          <div className="measurement-card primary-measure">
-            <span>TOTAL CALCULATED AREA</span>
-            <strong>
-              {formattedArea} <i>m²</i>
-            </strong>
-            <div>
-              <span>{stats?.total_area_sqkm ? `${stats.total_area_sqkm.toFixed(4)} km²` : `${((stats?.total_area_sqm || 0) / 10000).toFixed(3)} ha`}</span>
-              <span>{stats?.total_area_acres ? `${stats.total_area_acres.toFixed(3)} acres` : `${((stats?.total_area_sqm || 0) * 0.000247105).toFixed(3)} acres`}</span>
+          {(stats?.polygon_count ?? 0) > 0 ? (
+            <div className="measurement-card primary-measure">
+              <span>POLYGON ENCLOSED AREA ({stats?.polygon_count} {stats?.polygon_count === 1 ? 'POLYGON' : 'POLYGONS'})</span>
+              <strong>
+                {formattedArea} <i>m²</i>
+              </strong>
+              <div>
+                <span>{stats?.total_area_sqkm ? `${stats.total_area_sqkm.toFixed(4)} km²` : `${((stats?.total_area_sqm || 0) / 10000).toFixed(3)} ha`}</span>
+                <span>{stats?.total_area_acres ? `${stats.total_area_acres.toFixed(3)} acres` : `${((stats?.total_area_sqm || 0) * 0.000247105).toFixed(3)} acres`}</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="measurement-card opacity-70">
+              <span>POLYGON ENCLOSED AREA</span>
+              <strong className="text-sm font-medium text-[#8A95A5]">
+                N/A <i>(0 Polygons)</i>
+              </strong>
+              <div>
+                <span className="text-[11px] text-[#8A95A5]">No 2D closed polygon parcels in dataset</span>
+              </div>
+            </div>
+          )}
 
-          <div className="measurement-card">
-            <span>TOTAL LINE LENGTH</span>
-            <strong>
-              {formattedLength} <i>km</i>
-            </strong>
-            <div>
-              <span>{(stats?.total_length_m || 0).toLocaleString(undefined, { maximumFractionDigits: 1 })} meters</span>
-              <span>{((stats?.total_length_m || 0) * 0.000621371).toFixed(2)} miles</span>
+          {(stats?.linestring_count ?? 0) > 0 ? (
+            <div className="measurement-card">
+              <span>NETWORK LINE LENGTH ({stats?.linestring_count} {stats?.linestring_count === 1 ? 'LINE' : 'LINES'})</span>
+              <strong>
+                {formattedLength} <i>km</i>
+              </strong>
+              <div>
+                <span>{(stats?.total_length_m || 0).toLocaleString(undefined, { maximumFractionDigits: 1 })} meters</span>
+                <span>{((stats?.total_length_m || 0) * 0.000621371).toFixed(2)} miles</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="measurement-card opacity-70">
+              <span>NETWORK LINE LENGTH</span>
+              <strong className="text-sm font-medium text-[#8A95A5]">
+                N/A <i>(0 Lines)</i>
+              </strong>
+              <div>
+                <span className="text-[11px] text-[#8A95A5]">No 1D linear routes/lines in dataset</span>
+              </div>
+            </div>
+          )}
         </aside>
       </div>
 
