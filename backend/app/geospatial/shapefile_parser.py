@@ -98,6 +98,7 @@ class ShapefileParser:
 
     @classmethod
     def parse_shapefile_zip(cls, zip_path: str) -> Tuple[List[Dict[str, Any]], Optional[str], Optional[str]]:
+        os.makedirs(settings.TEMP_DIR, exist_ok=True)
         temp_extract_dir = tempfile.mkdtemp(prefix="terraflow_shp_", dir=settings.TEMP_DIR)
         try:
             shp_path, err = cls.extract_and_validate_zip(zip_path, temp_extract_dir)

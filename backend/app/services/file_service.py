@@ -53,6 +53,8 @@ class FileService:
                 detail=f"Unsupported file format '{ext}'. Only .kml and .zip (containing Shapefile) files are allowed."
             )
 
+        os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
+        os.makedirs(settings.TEMP_DIR, exist_ok=True)
         clean_filename = cls.sanitize_filename(raw_filename)
         file_type = "kml" if ext == ".kml" else "shapefile_zip"
         unique_prefix = str(uuid.uuid4())

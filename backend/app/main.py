@@ -21,18 +21,26 @@ logging.basicConfig(
 )
 logger = logging.getLogger("terraflow")
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    logger.info("Initializing TerraFlow backend engine...")
-    # 1. Ensure MySQL database exists
+def init_database():
+    try:
+        os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
+        os.makedirs(settings.TEMP_DIR, exist_ok=True)
+    except Exception:
+        pass
     ensure_database_exists()
-    # 2. Create tables automatically if not already present
     try:
         Base.metadata.create_all(bind=engine)
         logger.info("Database tables verified/created successfully.")
     except Exception as e:
-        logger.error(f"Could not connect to MySQL database during startup: {e}")
-        logger.info("Ensure XAMPP MySQL is running on localhost:3306 with credentials in .env")
+        logger.warning(f"Could not connect to database during startup/init: {e}")
+
+# Run immediate init for serverless environments (Vercel)
+init_database()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Initializing TerraFlow backend engine...")
+    init_database()
     yield
     logger.info("Shutting down TerraFlow backend engine...")
 
