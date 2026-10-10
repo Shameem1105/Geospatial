@@ -72,8 +72,8 @@ export const Upload: React.FC = () => {
         navigate(`/processing?fileId=${result.file_id}&filename=${encodeURIComponent(selectedFile.name)}`);
       }
     } catch (err: any) {
-      console.warn('Backend upload encountered an issue, transitioning to processing view:', err);
-      navigate(`/processing?filename=${encodeURIComponent(selectedFile.name)}`);
+      const msg = err.response?.data?.detail || err.response?.data?.error?.message || err.message || 'Failed to upload and process file.';
+      setError(msg);
     } finally {
       setIsUploading(false);
     }

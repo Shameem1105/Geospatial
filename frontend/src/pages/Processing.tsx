@@ -51,6 +51,10 @@ export const Processing: React.FC = () => {
             setTimeout(() => {
               navigate(`/analysis?fileId=${fileId}`);
             }, 600);
+          } else if (file.status === 'FAILED') {
+            clearInterval(interval);
+            alert(`File processing encountered an issue: ${file.processing_error || 'Unknown error'}`);
+            navigate('/upload');
           }
         } catch (e) {
           console.log('Status polling error, continuing demo progress:', e);
