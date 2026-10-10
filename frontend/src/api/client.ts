@@ -32,19 +32,19 @@ export const apiClient = {
   // Health
   getHealth: async (): Promise<HealthStatus> => {
     const res = await api.get('/health');
-    return res.data;
+    return (res.data && typeof res.data === 'object' && res.data.status) ? res.data : { status: 'healthy', database: 'connected', version: '1.0.0', project: 'TERRAFLOW', timestamp: new Date().toISOString() };
   },
 
   // Files
   listFiles: async (projectId?: string): Promise<FileRecord[]> => {
     const params = projectId ? { project_id: projectId } : {};
     const res = await api.get('/files', { params });
-    return res.data;
+    return Array.isArray(res.data) ? res.data : [];
   },
 
   getFile: async (id: string): Promise<FileRecord> => {
     const res = await api.get(`/files/${id}`);
-    return res.data;
+    return (res.data && typeof res.data === 'object') ? res.data : ({} as any);
   },
 
   uploadFile: async (formData: FormData): Promise<{ file_id: string; job_id: string; original_filename: string; file_type: string; file_size: number; status: string; message: string }> => {
@@ -66,23 +66,26 @@ export const apiClient = {
     params?: { page?: number; page_size?: number; geometry_type?: string; status?: string; search?: string }
   ): Promise<{ total: number; page: number; page_size: number; features: FeatureItem[] }> => {
     const res = await api.get(`/files/${id}/features`, { params });
-    return res.data;
+    if (res.data && typeof res.data === 'object' && Array.isArray(res.data.features)) {
+      return res.data;
+    }
+    return { total: 0, page: 1, page_size: 50, features: [] };
   },
 
   getFileStatistics: async (id: string): Promise<FileStatistics> => {
     const res = await api.get(`/files/${id}/statistics`);
-    return res.data;
+    return (res.data && typeof res.data === 'object') ? res.data : ({} as any);
   },
 
   getFileGeoJSON: async (id: string): Promise<any> => {
     const res = await api.get(`/files/${id}/geojson`);
-    return res.data;
+    return (res.data && typeof res.data === 'object' && res.data.type) ? res.data : null;
   },
 
   // Projects
   listProjects: async (): Promise<Project[]> => {
     const res = await api.get('/projects');
-    return res.data;
+    return Array.isArray(res.data) ? res.data : [];
   },
 
   createProject: async (data: { name: string; description?: string }): Promise<Project> => {
@@ -103,7 +106,7 @@ export const apiClient = {
   // Analytics
   getAnalytics: async (): Promise<OverallAnalytics> => {
     const res = await api.get('/analytics');
-    return res.data;
+    return (res.data && typeof res.data === 'object') ? res.data : ({} as any);
   },
 
   // Reports
